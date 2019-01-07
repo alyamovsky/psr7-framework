@@ -1,13 +1,15 @@
 {
-    "name": "ddlzz/psr7.lcp",
-    "authors": [
-        {
-            "name": "Andrew Alyamovsky",
-            "email": "ddlzz@yandex.ru"
-        }
-    ],
-    "require": {},
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.14"
+  "name": "ddlzz/psr7.lcp",
+  "authors": [
+    {
+      "name": "Andrew Alyamovsky",
+      "email": "ddlzz@yandex.ru"
     }
+  ],
+  "require": {
+    "php": ">=7.1.3"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.14"
+  }
 }
