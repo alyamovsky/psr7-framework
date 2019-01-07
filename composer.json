@@ -1,0 +1,13 @@
+{
+    "name": "ddlzz/psr7.lcp",
+    "authors": [
+        {
+            "name": "Andrew Alyamovsky",
+            "email": "ddlzz@yandex.ru"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.14"
+    }
+}
