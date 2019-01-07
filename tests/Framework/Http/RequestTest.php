@@ -9,20 +9,11 @@ use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $_GET = [];
-        $_POST = [];
-    }
-
     public function testEmptyRequest(): void
     {
-        $_GET = [];
-        $_POST = [];
-
-        $request = new Request();
+        $request = (new Request())
+            ->setQueryParams([])
+        ;
 
         self::assertEquals([], $request->getQueryParams());
         self::assertNull($request->getParsedBody());
@@ -30,24 +21,34 @@ class RequestTest extends TestCase
 
     public function testQueryParams(): void
     {
-        $_GET = $data = [
-            'name' => 'John',
-            'age' => 23,
-        ];
+        $request1 = (new Request())
+            ->setQueryParams($data1 = [
+                'name' => 'John',
+                'age' => 23,
+            ])
+        ;
 
-        $request = new Request();
+        $request2 = (new Request())
+            ->setQueryParams($data2 = [
+                'name' => 'James',
+                'age' => 17,
+            ])
+        ;
 
-        self::assertEquals($data, $request->getQueryParams());
-        self::assertNull($request->getParsedBody());
+        self::assertEquals($data1, $request1->getQueryParams());
+        self::assertEquals($data2, $request2->getQueryParams());
+        self::assertNull($request1->getParsedBody());
+        self::assertNull($request2->getParsedBody());
     }
 
     public function testParsedBody(): void
     {
-        $_POST = $data = [
-            'title' => 'Foobar',
-        ];
-
-        $request = new Request();
+        $request = (new Request())
+            ->setQueryParams([])
+            ->setParsedBody($data = [
+                'title' => 'Foobar',
+            ])
+        ;
 
         self::assertEquals([], $request->getQueryParams());
         self::assertEquals($data, $request->getParsedBody());

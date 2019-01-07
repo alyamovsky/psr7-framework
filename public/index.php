@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-use Framework\Http\Request;
+use Framework\Http\RequestFactory;
 
 require __DIR__.'/../vendor/autoload.php';
 
 // init
 
-$request = new Request();
+$request = RequestFactory::fromGlobals();
+
+// action
 
 $name = $request->getQueryParams()['name'] ?? 'vasya';
 
