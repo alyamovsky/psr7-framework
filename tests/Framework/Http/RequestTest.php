@@ -12,7 +12,7 @@ class RequestTest extends TestCase
     public function testEmptyRequest(): void
     {
         $request = (new Request())
-            ->setQueryParams([])
+            ->withQueryParams([])
         ;
 
         self::assertEquals([], $request->getQueryParams());
@@ -22,14 +22,14 @@ class RequestTest extends TestCase
     public function testQueryParams(): void
     {
         $request1 = (new Request())
-            ->setQueryParams($data1 = [
+            ->withQueryParams($data1 = [
                 'name' => 'John',
                 'age' => 23,
             ])
         ;
 
         $request2 = (new Request())
-            ->setQueryParams($data2 = [
+            ->withQueryParams($data2 = [
                 'name' => 'James',
                 'age' => 17,
             ])
@@ -44,8 +44,8 @@ class RequestTest extends TestCase
     public function testParsedBody(): void
     {
         $request = (new Request())
-            ->setQueryParams([])
-            ->setParsedBody($data = [
+            ->withQueryParams([])
+            ->withParsedBody($data = [
                 'title' => 'Foobar',
             ])
         ;

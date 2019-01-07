@@ -22,7 +22,7 @@ $response = (new Response(\sprintf('hello, %s!', $name)))
 // render
 
 \header(\sprintf('HTTP/1.0 %s %s', $response->getStatusCode(), $response->getReasonPhrase()));
-foreach ($response->getHeaders() as $header => $value) {
-    \header(\sprintf('%s: %s', $header, $value));
+foreach ($response->getHeaders() as $header => $values) {
+    \header(\sprintf('%s: %s', $header, \implode(', ', $values)));
 }
 echo $response->getBody();
