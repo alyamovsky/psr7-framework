@@ -1,0 +1,1 @@
+- [ ] заменить diactoros на symfony http foundation
