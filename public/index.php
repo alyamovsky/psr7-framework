@@ -12,13 +12,28 @@ require __DIR__.'/../vendor/autoload.php';
 
 $request = ServerRequestFactory::fromGlobals();
 
+// pre-processing
+
+if (false !== \stripos($request->getHeaderLine('Content-Type'), 'json')) {
+    $request = $request->withParsedBody(\json_decode($request->getBody()->getContents()));
+}
+
 // action
 
-$name = $request->getQueryParams()['name'] ?? 'vasya';
+$path = $request->getUri()->getPath();
 
-$response = (new HtmlResponse(\sprintf('hello, %s!', $name)))
-    ->withHeader('X-Developer', 'ddlzz')
-;
+if ('/' === $path) {
+    $name = $request->getQueryParams()['name'] ?? 'vasya';
+    $response = new HtmlResponse(\sprintf('hello, %s!', $name));
+} elseif ('/about' === $path) {
+    $response = new HtmlResponse('I am a simple site.');
+} else {
+    $response = new \Zend\Diactoros\Response\JsonResponse(['error' => 'Undefined page', 404]);
+}
+
+// postprocessing
+
+$response->withHeader('X-Developer', 'ddlzz');
 
 // send
 
