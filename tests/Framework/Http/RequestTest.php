@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Framework\Http;
 
-use Framework\Http\Request;
 use PHPUnit\Framework\TestCase;
+use Zend\Diactoros\ServerRequest;
 
 class RequestTest extends TestCase
 {
     public function testEmptyRequest(): void
     {
-        $request = (new Request())
+        $request = (new ServerRequest())
             ->withQueryParams([])
         ;
 
@@ -21,14 +21,14 @@ class RequestTest extends TestCase
 
     public function testQueryParams(): void
     {
-        $request1 = (new Request())
+        $request1 = (new ServerRequest())
             ->withQueryParams($data1 = [
                 'name' => 'John',
                 'age' => 23,
             ])
         ;
 
-        $request2 = (new Request())
+        $request2 = (new ServerRequest())
             ->withQueryParams($data2 = [
                 'name' => 'James',
                 'age' => 17,
@@ -43,7 +43,7 @@ class RequestTest extends TestCase
 
     public function testParsedBody(): void
     {
-        $request = (new Request())
+        $request = (new ServerRequest())
             ->withQueryParams([])
             ->withParsedBody($data = [
                 'title' => 'Foobar',

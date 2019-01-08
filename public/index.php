@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use Framework\Http\RequestFactory;
 use Framework\Http\Response;
+use Zend\Diactoros\ServerRequestFactory;
 
 require __DIR__.'/../vendor/autoload.php';
 
 // init
 
-$request = RequestFactory::fromGlobals();
+$request = ServerRequestFactory::fromGlobals();
 
 // action
 
@@ -22,7 +22,7 @@ $response = (new Response(\sprintf('hello, %s!', $name)))
 // render
 
 \header(\sprintf('HTTP/1.0 %s %s', $response->getStatusCode(), $response->getReasonPhrase()));
-foreach ($response->getHeaders() as $header => $values) {
-    \header(\sprintf('%s: %s', $header, \implode(', ', $values)));
+foreach ($response->getHeaders() as $header => $value) {
+    \header(\sprintf('%s: %s', $header, $value));
 }
 echo $response->getBody();
