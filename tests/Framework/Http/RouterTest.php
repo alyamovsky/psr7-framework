@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Framework\Http;
 
+use Framework\Http\Router\Exception\RequestNotMatchedException;
+use Framework\Http\Router\Router;
+use Framework\Http\Router\RouteCollection;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Zend\Diactoros\ServerRequest;
