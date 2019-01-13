@@ -8,7 +8,7 @@ use Framework\Http\Router\Exception\RequestNotMatchedException;
 use Framework\Http\Router\Router;
 use Framework\Http\Router\RouteCollection;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Uri;
 
@@ -28,8 +28,8 @@ class RouterTest extends TestCase
         self::assertEquals($handlerGet, $resultGet->getHandler());
 
         $resultPost = $router->match($this->buildRequest('POST', '/blog'));
-        self::assertEquals($nameGet, $resultPost->getName());
-        self::assertEquals($handlerGet, $resultPost->getHandler());
+        self::assertEquals($nameGet, $resultGet->getName());
+        self::assertEquals($handlerPost, $resultPost->getHandler());
     }
 
     public function testMissingMethod(): void
@@ -48,7 +48,7 @@ class RouterTest extends TestCase
     {
         $routes = new RouteCollection();
 
-        $routes->get($name = 'blog', '/blog', 'handler', ['id' => '\d+']);
+        $routes->get($name = 'blog_show', '/blog/{id}', 'handler', ['id' => '\d+']);
 
         $router = new Router($routes);
 
@@ -95,7 +95,7 @@ class RouterTest extends TestCase
         $router->generate('blog_show', ['slug' => 'post']);
     }
 
-    private function buildRequest(string $method, string $uri): RequestInterface
+    private function buildRequest(string $method, string $uri): ServerRequestInterface
     {
         return (new ServerRequest())
             ->withMethod($method)
