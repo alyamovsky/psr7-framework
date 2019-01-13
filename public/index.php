@@ -56,7 +56,9 @@ try {
         $request = $request->withAttribute($attribute, $value);
     }
 
+    /** @var callable $action */
     $action = $result->getHandler();
+    /** @noinspection PhpMethodParametersCountMismatchInspection */
     $response = $action($request);
 } catch (RequestNotMatchedException $e) {
     $response = new JsonResponse(['error' => 'Undefined page', 404]);
