@@ -8,6 +8,8 @@ class Result
 {
     /** @var string */
     private $name;
+
+    /** @var callable|string */
     private $handler;
 
     /** @var array */
@@ -48,7 +50,7 @@ class Result
     }
 
     /**
-     * @return mixed
+     * @return callable|string
      */
     public function getHandler()
     {
